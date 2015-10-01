@@ -1,0 +1,18 @@
+{
+  "name": "antevenio/redis",
+  "description": "Easing access to the predis library",
+  "type": "library",
+  "require": {
+    "predis/predis": "v1.0.1",
+    "eleme/rlock": "dev-master"
+  },
+  "dist": {
+    "url": "http://www.smarty.net/files/Smarty-3.1.7.zip",
+    "type": "zip"
+  },
+  "autoload": {
+    "psr-4": {
+      "Antevenio\\Redis\\": "src/"
+    }
+  }
+}
