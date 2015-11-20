@@ -43,6 +43,38 @@ class Client
         return $this->_client->incrby($key, $increment);
     }
 
+    public function addToSet($key, $value)
+    {
+        if (!is_array($value)) {
+            $value = array($value);
+        }
+        return $this->_client->sadd($key, $value);
+    }
+
+    public function removeFromSet($key, $value)
+    {
+        if (!is_array($value)) {
+            $value = array($value);
+        }
+        return $this->_client->srem($key, $value);
+    }
+
+    public function addToSetSerialized($key, $value)
+    {
+        return $this->addToSet($key, serialize($value));
+    }
+
+    public function removeFromSetSerialized($key, $value)
+    {
+        return $this->removeFromSet($key, serialize($value));
+    }
+
+    public function scanSet($key, $match = null, $count = null)
+    {
+        $iterator = new Iterator\SetKey($this->_client,$key,$match,$count);
+        return( $iterator );
+    }
+
     public function decrementKey($key, $increment)
     {
         return $this->_client->decrby($key, $increment);
