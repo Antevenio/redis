@@ -75,6 +75,11 @@ class Client
         return( $iterator );
     }
 
+    public function existsInSet($key, $value)
+    {
+        return $this->_client->sismember($key, $value);
+    }
+
     public function decrementKey($key, $increment)
     {
         return $this->_client->decrby($key, $increment);
@@ -126,6 +131,11 @@ class Client
     public function set($key,$value)
     {
         return ($this->_client->set($key,$value));
+    }
+
+    public function expire($key, $seconds)
+    {
+        return ($this->_client->expire($key, $seconds));
     }
 
     public function setSerialized($key,$value)
