@@ -10,6 +10,10 @@ class Client
     /**
      * @var \Predis\Client
      */
+    protected $_predis;
+    /**
+     * @var \Predis\Client
+     */
     protected $_client;
     protected $_prefix;
     protected $_config;
@@ -23,11 +27,11 @@ class Client
         $options = $this->_config['options'];
         $this->_prefix = $options["prefix"];
 
-        $client = new \Predis\Client(
+        $this->_predis = new \Predis\Client(
             $parameters,
             $options
         );
-        $this->_client = new FailsafeClient($client);
+        $this->_client = new FailsafeClient($this->_predis);
     }
 
     public function connect()
@@ -89,7 +93,7 @@ class Client
 
     public function acquireLock( $key )
     {
-        $this->_lock[$key] = new Lock( $this->_client, $key,
+        $this->_lock[$key] = new Lock( $this->_predis, $key,
             array(
                 'transaction' => false,
                 'interval' => 200
