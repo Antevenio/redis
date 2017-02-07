@@ -23,11 +23,10 @@ class Client
         $options = $this->_config['options'];
         $this->_prefix = $options["prefix"];
 
-        $client = new \Predis\Client(
+        $this->_client = new FailsafeClient(
             $parameters,
             $options
         );
-        $this->_client = new FailsafeClient($client);
     }
 
     public function connect()

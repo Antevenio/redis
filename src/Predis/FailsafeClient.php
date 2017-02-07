@@ -3,15 +3,9 @@ namespace Antevenio\Redis\Predis;
 
 use Predis\Connection\ConnectionException;
 
-class FailsafeClient
+class FailsafeClient extends \Predis\Client
 {
     const RETRY_TIMES = 10;
-    protected $client;
-
-    public function __construct(\Predis\Client $client)
-    {
-        $this->client = $client;
-    }
 
     public function __call($method, $args)
     {
@@ -20,7 +14,7 @@ class FailsafeClient
         do {
             $retries++;
             try {
-                $retValue = call_user_func_array(array($this->client, $method), $args);
+                $retValue = call_user_func_array(array($this, $method), $args);
                 $retryCall = false;
             } catch (ConnectionException $ex) {
                 echo $ex->getMessage() . "\n";
