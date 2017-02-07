@@ -1,6 +1,7 @@
 <?php
 namespace Antevenio\Redis;
 
+use Antevenio\Redis\Predis\FailsafeClient;
 use Eleme\Rlock\Lock;
 use Predis\Collection\Iterator;
 
@@ -22,10 +23,11 @@ class Client
         $options = $this->_config['options'];
         $this->_prefix = $options["prefix"];
 
-        $this->_client = new \Predis\Client(
+        $client = new \Predis\Client(
             $parameters,
             $options
         );
+        $this->_client = new FailsafeClient($client);
     }
 
     public function connect()
