@@ -77,7 +77,7 @@ class Client
 
     public function scanSet($key, $match = null, $count = null)
     {
-        $iterator = new Iterator\SetKey($this->_client,$key,$match,$count);
+        $iterator = new Iterator\SetKey($this->_predis,$key,$match,$count);
         return( $iterator );
     }
 
@@ -158,7 +158,7 @@ class Client
 
     public function scanKeys($pattern, $count = NULL)
     {
-        $iterator = new Iterator\Keyspace($this->_client,$this->_prefix.$pattern, $count);
+        $iterator = new Iterator\Keyspace($this->_predis,$this->_prefix.$pattern, $count);
         return( $iterator );
     }
 
