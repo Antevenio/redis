@@ -6,10 +6,6 @@
     "predis/predis": "v1.0.1",
     "eleme/rlock": "dev-master"
   },
-  "dist": {
-    "url": "https://github.com/Antevenio/redis/archive/master.zip",
-    "type": "zip"
-  },
   "autoload": {
     "psr-4": {
       "Antevenio\\Redis\\": "src/"
