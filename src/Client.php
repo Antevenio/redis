@@ -139,6 +139,11 @@ class Client
         return ($this->_client->expire($key, $seconds));
     }
 
+    public function ttl($key)
+    {
+        return ($this->_client->ttl($key));
+    }
+
     public function setSerialized($key,$value)
     {
         return ($this->set($key,serialize($value)));
