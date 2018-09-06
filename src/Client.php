@@ -171,4 +171,14 @@ class Client
     {
         return (substr($key, strlen($this->_prefix)));
     }
+
+    public function rpush($key, $value)
+    {
+        return $this->_client->rpush($key, $value);
+    }
+
+    public function rpop($key)
+    {
+        return $this->_client->rpop($key);
+    }
 }
