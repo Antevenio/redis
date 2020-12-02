@@ -34,6 +34,11 @@ class Client
         $this->_client = new FailsafeClient($this->_predis);
     }
 
+    public function getClient()
+    {
+        return $this->_client;
+    }
+
     public function connect()
     {
         $this->_client->connect();
